@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organisasi Kami</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NOISE OVERLAY -->
+  <div class="noise"></div>
+
+  <!-- BACKGROUND ORBS -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <div class="logo-wrap">
+        <!-- Ganti dengan logo Anda: <img src="logo.png" alt="Logo" class="logo-img"> -->
+        <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="24,3 45,38 3,38" fill="none" stroke="#FF6B1A" stroke-width="2.5"/>
+          <polygon points="24,14 38,38 10,38" fill="#FF6B1A" opacity="0.2"/>
+          <circle cx="24" cy="23" r="4.5" fill="#FF6B1A"/>
+        </svg>
+        <span class="logo-text">ORG<span class="accent">·</span>NAME</span>
+      </div>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero"      class="nav-link">Beranda</a></li>
+      <li><a href="#visi-misi" class="nav-link">Visi &amp; Misi</a></li>
+      <li><a href="#dokumen"   class="nav-link">Dokumen</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-tag reveal">ORGANISASI TERBAIK</div>
+    <h1 class="hero-title reveal">
+      Bersama<br />
+      <em class="hero-accent">Membangun</em><br />
+      Masa Depan
+    </h1>
+    <p class="hero-sub reveal">Inovasi &nbsp;·&nbsp; Integritas &nbsp;·&nbsp; Inspirasi</p>
+    <div class="hero-cta reveal">
+      <a href="#visi-misi" class="btn-primary">Jelajahi</a>
+      <a href="#dokumen"   class="btn-ghost">Dokumen</a>
+    </div>
+    <div class="hero-deco reveal">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- floating badge -->
+    <div class="hero-badge reveal">
+      <svg viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="30" r="28" stroke="#FF6B1A" stroke-width="1" stroke-dasharray="4 3"/>
+      </svg>
+      <span>EST<br/>2025</span>
+    </div>
+  </section>
+
+  <!-- ===== VISI MISI ===== -->
+  <section class="section" id="visi-misi">
+    <div class="section-header reveal">
+      <span class="section-tag">Landasan Kami</span>
+      <h2 class="section-title">Visi &amp; Misi</h2>
+    </div>
+
+    <div class="vm-grid">
+
+      <!-- VISI -->
+      <div class="vm-card morph-card reveal">
+        <div class="vm-icon-wrap">
+          <svg viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="9" stroke="#FF6B1A" stroke-width="1.8"/>
+            <circle cx="20" cy="20" r="3" fill="#FF6B1A"/>
+            <line x1="20" y1="2"  x2="20" y2="8"  stroke="#FF6B1A" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="20" y1="32" x2="20" y2="38" stroke="#FF6B1A" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="2"  y1="20" x2="8"  y2="20" stroke="#FF6B1A" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="32" y1="20" x2="38" y2="20" stroke="#FF6B1A" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="vm-title">Visi</h3>
+        <p class="vm-text">
+          Menjadi organisasi yang unggul, berdedikasi, dan berdampak nyata bagi masyarakat luas — menghadirkan generasi pemimpin yang berkarakter, inovatif, dan berdaya saing global.
+        </p>
+        <div class="vm-bar"></div>
+      </div>
+
+      <!-- MISI -->
+      <div class="vm-card morph-card reveal" style="--d:.15s">
+        <div class="vm-icon-wrap">
+          <svg viewBox="0 0 40 40" fill="none">
+            <path d="M8 12h24M8 20h16M8 28h20" stroke="#FF6B1A" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="32" cy="28" r="5" stroke="#FF6B1A" stroke-width="1.8"/>
+            <path d="M30 28l1.5 1.5L34 26" stroke="#FF6B1A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="vm-title">Misi</h3>
+        <ul class="vm-list">
+          <li>Mengembangkan kapasitas anggota melalui program pelatihan berkelanjutan.</li>
+          <li>Membangun jaringan kolaborasi yang solid antar lembaga.</li>
+          <li>Mendorong inovasi dan kreativitas dalam setiap program kerja.</li>
+          <li>Mewujudkan tata kelola organisasi yang transparan dan akuntabel.</li>
+        </ul>
+        <div class="vm-bar"></div>
+      </div>
+
+      <!-- NILAI INTI -->
+      <div class="vm-card vm-wide morph-card reveal" style="--d:.3s">
+        <h3 class="vm-title">Nilai Inti</h3>
+        <div class="nilai-grid">
+          <div class="nilai-item"><span class="n-num">01</span><span class="n-label">Integritas</span></div>
+          <div class="nilai-item"><span class="n-num">02</span><span class="n-label">Inovasi</span></div>
+          <div class="nilai-item"><span class="n-num">03</span><span class="n-label">Kolaborasi</span></div>
+          <div class="nilai-item"><span class="n-num">04</span><span class="n-label">Inklusif</span></div>
+        </div>
+        <div class="vm-bar"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== DOKUMEN ===== -->
+  <section class="section section-dark" id="dokumen">
+    <div class="section-header reveal">
+      <span class="section-tag">Arsip Resmi</span>
+      <h2 class="section-title">Dokumen</h2>
+    </div>
+
+    <div class="doc-grid">
+
+      <!-- BENDAHARA -->
+      <div class="doc-card morph-card reveal" style="--d:0s">
+        <div class="doc-num">01</div>
+        <div class="doc-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none">
+            <rect x="8" y="6" width="32" height="36" rx="4" stroke="#FF6B1A" stroke-width="1.8"/>
+            <path d="M16 18h16M16 26h10" stroke="#FF6B1A" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="34" cy="36" r="6" fill="#0a0a0a" stroke="#FF6B1A" stroke-width="1.5"/>
+            <path d="M32 36h4M34 34v4" stroke="#FF6B1A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="doc-title">Bendahara</h3>
+        <p class="doc-desc">Laporan keuangan, anggaran, realisasi, dan dokumen fiskal organisasi.</p>
+        <a href="https://drive.google.com/drive/folders/LINK_BENDAHARA_ANDA" target="_blank" class="doc-btn">
+          <span>Buka Drive</span>
+          <svg viewBox="0 0 20 20" fill="none" width="16"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="doc-bg-text">KEUANGAN</div>
+      </div>
+
+      <!-- SEKRETARIS -->
+      <div class="doc-card morph-card reveal" style="--d:.12s">
+        <div class="doc-num">02</div>
+        <div class="doc-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none">
+            <rect x="8" y="6" width="32" height="36" rx="4" stroke="#FF6B1A" stroke-width="1.8"/>
+            <path d="M16 18h16M16 24h16M16 30h10" stroke="#FF6B1A" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M28 6v10l4-2 4 2V6" stroke="#FF6B1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="doc-title">Sekretaris</h3>
+        <p class="doc-desc">Notulen rapat, surat menyurat, agenda kegiatan, dan arsip administrasi.</p>
+        <a href="https://drive.google.com/drive/folders/LINK_SEKRETARIS_ANDA" target="_blank" class="doc-btn">
+          <span>Buka Drive</span>
+          <svg viewBox="0 0 20 20" fill="none" width="16"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="doc-bg-text">ADMINIST.</div>
+      </div>
+
+      <!-- PENDIDIKAN -->
+      <div class="doc-card morph-card reveal" style="--d:.24s">
+        <div class="doc-num">03</div>
+        <div class="doc-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M24 8L6 18l18 10 18-10L24 8z" stroke="#FF6B1A" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M6 18v12M42 18v4" stroke="#FF6B1A" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M12 21v9c0 0 3.5 6 12 6s12-6 12-6V21" stroke="#FF6B1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="doc-title">Pendidikan</h3>
+        <p class="doc-desc">Modul pelatihan, kurikulum, materi seminar, dan program pengembangan SDM.</p>
+        <a href="https://drive.google.com/drive/folders/LINK_PENDIDIKAN_ANDA" target="_blank" class="doc-btn">
+          <span>Buka Drive</span>
+          <svg viewBox="0 0 20 20" fill="none" width="16"><path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="doc-bg-text">EDUKASI</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="logo-wrap">
+        <svg class="logo-icon" viewBox="0 0 48 48" fill="none">
+          <polygon points="24,3 45,38 3,38" fill="none" stroke="#FF6B1A" stroke-width="2.5"/>
+          <circle cx="24" cy="23" r="4.5" fill="#FF6B1A"/>
+        </svg>
+        <span class="logo-text">ORG<span class="accent">·</span>NAME</span>
+      </div>
+      <p class="footer-copy">© 2025 Organisasi Kami &nbsp;·&nbsp; Semua Hak Dilindungi</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
