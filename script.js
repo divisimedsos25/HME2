@@ -1,223 +1,249 @@
-/* ═══════════════════════════════════════════════
+/* ══════════════════════════════════════════════
    script.js — OrganisasiKu
-   Modern Elegant | Orange × Black × White
-═══════════════════════════════════════════════ */
+   Tema: Modern Elegant | Oranye × Hitam × Putih
+══════════════════════════════════════════════ */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
 
-  /* ─────────────────────────────────────────
+  /* ═══════════════════════════════════════════
      1. CUSTOM CURSOR
-  ───────────────────────────────────────── */
-  const cursor      = document.getElementById('cursor');
-  const cursorTrail = document.getElementById('cursorTrail');
-  const cursorRing  = document.getElementById('cursorRing');
+  ═══════════════════════════════════════════ */
+  var dot  = document.getElementById('cursor-dot');
+  var ring = document.getElementById('cursor-ring');
 
-  let mouseX = 0, mouseY = 0;
-  let trailX = 0, trailY = 0;
+  var mx = 0, my = 0;   // mouse
+  var rx = 0, ry = 0;   // ring (lagged)
 
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top  = mouseY + 'px';
+  document.addEventListener('mousemove', function (e) {
+    mx = e.clientX;
+    my = e.clientY;
+    // Dot follows instantly
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
   });
 
-  (function animateCursor() {
-    trailX += (mouseX - trailX) * 0.1;
-    trailY += (mouseY - trailY) * 0.1;
-    cursorTrail.style.left = trailX + 'px';
-    cursorTrail.style.top  = trailY + 'px';
-    cursorRing.style.left  = (trailX - 18) + 'px';
-    cursorRing.style.top   = (trailY - 18) + 'px';
-    requestAnimationFrame(animateCursor);
+  // Ring lerp loop
+  (function lerp() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    // Ring positioned so its center = cursor
+    ring.style.left = (rx - 20) + 'px';
+    ring.style.top  = (ry - 20) + 'px';
+    requestAnimationFrame(lerp);
   })();
 
-  const hoverTargets = document.querySelectorAll(
-    'a, button, .doc-card, .vm-card, .nilai-item, .doc-btn, .btn-primary, .btn-ghost'
-  );
-  hoverTargets.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.classList.add('hov');
-      cursorRing.classList.add('hov');
+  // Hover state
+  document.querySelectorAll('a, button, .doc-card, .vm-card, .nilai-card, .dc-btn, .btn-orange, .btn-outline').forEach(function (el) {
+    el.addEventListener('mouseenter', function () {
+      dot.classList.add('hov');
+      ring.classList.add('hov');
     });
-    el.addEventListener('mouseleave', () => {
-      cursor.classList.remove('hov');
-      cursorRing.classList.remove('hov');
+    el.addEventListener('mouseleave', function () {
+      dot.classList.remove('hov');
+      ring.classList.remove('hov');
     });
   });
 
-  document.addEventListener('mousedown', () => cursor.classList.add('click'));
-  document.addEventListener('mouseup',   () => cursor.classList.remove('click'));
+  // Click shrink
+  document.addEventListener('mousedown', function () { dot.classList.add('click'); });
+  document.addEventListener('mouseup',   function () { dot.classList.remove('click'); });
 
-  document.addEventListener('mouseleave', () => {
-    [cursor, cursorTrail, cursorRing].forEach(el => el.style.opacity = '0');
+  // Hide when leaving window
+  document.addEventListener('mouseleave', function () {
+    dot.style.opacity  = '0';
+    ring.style.opacity = '0';
   });
-  document.addEventListener('mouseenter', () => {
-    [cursor, cursorTrail, cursorRing].forEach(el => el.style.opacity = '1');
-  });
-
-
-  /* ─────────────────────────────────────────
-     2. NAVBAR — scroll shrink + active link
-  ───────────────────────────────────────── */
-  const navbar   = document.getElementById('navbar');
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
-
-  function onScroll() {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-
-    let current = '';
-    sections.forEach(sec => {
-      if (window.scrollY >= sec.offsetTop - 130) current = sec.getAttribute('id');
-    });
-    navLinks.forEach(link => {
-      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
-    });
-
-    parallaxBgText();
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-
-  /* ─────────────────────────────────────────
-     3. SMOOTH SCROLL
-  ───────────────────────────────────────── */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-      e.preventDefault();
-      const target = document.querySelector(anchor.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+  document.addEventListener('mouseenter', function () {
+    dot.style.opacity  = '1';
+    ring.style.opacity = '1';
   });
 
 
-  /* ─────────────────────────────────────────
-     4. MORPH REVEAL — Intersection Observer
-  ───────────────────────────────────────── */
-  const morphObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        morphObserver.unobserve(entry.target);
+  /* ═══════════════════════════════════════════
+     2. NAVBAR — shrink on scroll + active link
+  ═══════════════════════════════════════════ */
+  var navbar   = document.getElementById('navbar');
+  var sections = document.querySelectorAll('section[id]');
+  var navLinks = document.querySelectorAll('.nav-link');
+
+  function updateNav() {
+    // Shrink
+    if (window.scrollY > 60) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+
+    // Active link
+    var current = '';
+    sections.forEach(function (sec) {
+      if (window.scrollY >= sec.offsetTop - 140) {
+        current = sec.getAttribute('id');
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    navLinks.forEach(function (link) {
+      var href = link.getAttribute('href').replace('#', '');
+      link.classList.toggle('active', href === current);
+    });
 
-  document.querySelectorAll('[data-morph]').forEach(el => morphObserver.observe(el));
+    // Parallax hero bg word
+    parallaxHero();
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
 
 
-  /* ─────────────────────────────────────────
-     5. PARALLAX — hero background text
-  ───────────────────────────────────────── */
-  const bgText = document.querySelector('.hero-bg-text');
+  /* ═══════════════════════════════════════════
+     3. SMOOTH SCROLL
+  ═══════════════════════════════════════════ */
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      var id = this.getAttribute('href');
+      var target = document.querySelector(id);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
 
-  function parallaxBgText() {
-    if (bgText) bgText.style.transform = `translateY(${window.scrollY * 0.28}px)`;
+
+  /* ═══════════════════════════════════════════
+     4. REVEAL ON SCROLL (Intersection Observer)
+  ═══════════════════════════════════════════ */
+  var revealObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObs.unobserve(entry.target); // fire once
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    revealObs.observe(el);
+  });
+
+
+  /* ═══════════════════════════════════════════
+     5. PARALLAX — hero bg word
+  ═══════════════════════════════════════════ */
+  var bgWord = document.querySelector('.hero-bg-word');
+
+  function parallaxHero() {
+    if (!bgWord) return;
+    bgWord.style.transform = 'translate(-50%, calc(-48% + ' + (window.scrollY * 0.25) + 'px))';
   }
 
 
-  /* ─────────────────────────────────────────
-     6. HERO RINGS — mouse tilt parallax
-  ───────────────────────────────────────── */
-  const rings = document.querySelectorAll('.hero-ring');
+  /* ═══════════════════════════════════════════
+     6. HERO RINGS — subtle mouse tilt
+  ═══════════════════════════════════════════ */
+  var rings = document.querySelectorAll('.ring');
 
-  document.addEventListener('mousemove', (e) => {
-    const cx = window.innerWidth  / 2;
-    const cy = window.innerHeight / 2;
-    const dx = (e.clientX - cx) / cx;
-    const dy = (e.clientY - cy) / cy;
+  document.addEventListener('mousemove', function (e) {
+    var cx = window.innerWidth  / 2;
+    var cy = window.innerHeight / 2;
+    var dx = (e.clientX - cx) / cx;
+    var dy = (e.clientY - cy) / cy;
 
-    rings.forEach((ring, i) => {
-      const factor = (i + 1) * 5;
-      ring.style.transform = `translate(${dx * factor}px, ${dy * factor}px)`;
+    rings.forEach(function (r, i) {
+      var f = (i + 1) * 5;
+      r.style.marginLeft = (dx * f) + 'px';
+      r.style.marginTop  = (dy * f) + 'px';
     });
   });
 
 
-  /* ─────────────────────────────────────────
-     7. CARD TILT — 3D hover on cards
-  ───────────────────────────────────────── */
-  document.querySelectorAll('.doc-card, .vm-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect  = card.getBoundingClientRect();
-      const cx    = rect.left + rect.width  / 2;
-      const cy    = rect.top  + rect.height / 2;
-      const dx    = (e.clientX - cx) / (rect.width  / 2);
-      const dy    = (e.clientY - cy) / (rect.height / 2);
+  /* ═══════════════════════════════════════════
+     7. CARD 3D TILT on hover
+  ═══════════════════════════════════════════ */
+  document.querySelectorAll('.doc-card, .vm-card').forEach(function (card) {
+    card.addEventListener('mousemove', function (e) {
+      var rect = card.getBoundingClientRect();
+      var cx   = rect.left + rect.width  / 2;
+      var cy   = rect.top  + rect.height / 2;
+      var dx   = (e.clientX - cx) / (rect.width  / 2);
+      var dy   = (e.clientY - cy) / (rect.height / 2);
 
-      card.style.transform  = `translateY(-6px) perspective(800px) rotateX(${dy * -5}deg) rotateY(${dx * 5}deg)`;
-      card.style.transition = 'transform 0.1s ease';
+      card.style.transition = 'transform 0.1s ease, border-color 0.4s';
+      card.style.transform  =
+        'translateY(-6px) perspective(900px) rotateX(' + (dy * -5) + 'deg) rotateY(' + (dx * 5) + 'deg)';
     });
 
-    card.addEventListener('mouseleave', () => {
+    card.addEventListener('mouseleave', function () {
+      card.style.transition = 'transform 0.55s cubic-bezier(0.23,1,0.32,1), border-color 0.4s';
       card.style.transform  = '';
-      card.style.transition = 'transform 0.55s cubic-bezier(0.23, 1, 0.32, 1)';
     });
   });
 
 
-  /* ─────────────────────────────────────────
-     8. RIPPLE EFFECT — buttons
-  ───────────────────────────────────────── */
-  document.querySelectorAll('.doc-btn, .btn-primary').forEach(btn => {
+  /* ═══════════════════════════════════════════
+     8. RIPPLE on buttons
+  ═══════════════════════════════════════════ */
+  document.querySelectorAll('.btn-orange, .dc-btn').forEach(function (btn) {
     btn.addEventListener('click', function (e) {
-      const rect   = this.getBoundingClientRect();
-      const ripple = document.createElement('span');
-      ripple.classList.add('ripple');
-      ripple.style.left = (e.clientX - rect.left) + 'px';
-      ripple.style.top  = (e.clientY - rect.top)  + 'px';
-      this.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 700);
+      var rect = btn.getBoundingClientRect();
+      var el   = document.createElement('span');
+      el.classList.add('ripple-el');
+      el.style.left = (e.clientX - rect.left)  + 'px';
+      el.style.top  = (e.clientY - rect.top)   + 'px';
+      btn.appendChild(el);
+      setTimeout(function () { el.remove(); }, 700);
     });
   });
 
 
-  /* ─────────────────────────────────────────
-     9. FLOATING PARTICLES — hero section
-  ───────────────────────────────────────── */
-  const hero = document.querySelector('.hero');
+  /* ═══════════════════════════════════════════
+     9. FLOATING PARTICLES in hero
+  ═══════════════════════════════════════════ */
+  var hero = document.getElementById('hero');
   if (hero) {
-    for (let i = 0; i < 20; i++) {
-      const p    = document.createElement('div');
+    for (var i = 0; i < 22; i++) {
+      var p    = document.createElement('div');
       p.classList.add('particle');
-      const size = Math.random() * 4 + 2;
-      p.style.cssText = `
-        width:  ${size}px;
-        height: ${size}px;
-        left:   ${Math.random() * 100}%;
-        top:    ${Math.random() * 100}%;
-        animation-duration:  ${Math.random() * 14 + 8}s;
-        animation-delay:     ${Math.random() * 8}s;
-        background: ${i % 3 === 0 ? 'rgba(255,106,0,0.55)' : 'rgba(255,255,255,0.2)'};
-      `;
+      var size = Math.random() * 4 + 2;
+      var dur  = Math.random() * 14 + 8;
+      var del  = Math.random() * 8;
+      var col  = i % 3 === 0
+        ? 'rgba(255,106,0,0.55)'
+        : 'rgba(255,255,255,0.18)';
+
+      p.style.cssText =
+        'width:'  + size + 'px;' +
+        'height:' + size + 'px;' +
+        'left:'   + (Math.random() * 100) + '%;' +
+        'top:'    + (Math.random() * 100) + '%;' +
+        'background:' + col + ';' +
+        'animation-duration:' + dur + 's;' +
+        'animation-delay:'   + del + 's;';
+
       hero.appendChild(p);
     }
   }
 
 
-  /* ─────────────────────────────────────────
-     10. MAGNETIC EFFECT — CTA buttons
-  ───────────────────────────────────────── */
-  document.querySelectorAll('.btn-primary, .btn-ghost').forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const dx   = (e.clientX - rect.left - rect.width  / 2) * 0.25;
-      const dy   = (e.clientY - rect.top  - rect.height / 2) * 0.25;
-      btn.style.transform  = `translate(${dx}px, ${dy}px)`;
+  /* ═══════════════════════════════════════════
+     10. MAGNETIC BUTTONS (CTA)
+  ═══════════════════════════════════════════ */
+  document.querySelectorAll('.btn-orange, .btn-outline').forEach(function (btn) {
+    btn.addEventListener('mousemove', function (e) {
+      var rect = btn.getBoundingClientRect();
+      var dx   = (e.clientX - rect.left - rect.width  / 2) * 0.22;
+      var dy   = (e.clientY - rect.top  - rect.height / 2) * 0.22;
       btn.style.transition = 'transform 0.15s ease';
+      btn.style.transform  = 'translate(' + dx + 'px,' + dy + 'px)';
     });
-    btn.addEventListener('mouseleave', () => {
+    btn.addEventListener('mouseleave', function () {
+      btn.style.transition = 'transform 0.5s ease, background 0.3s, box-shadow 0.3s';
       btn.style.transform  = '';
-      btn.style.transition = 'transform 0.5s ease';
     });
   });
 
 
-  /* ─────────────────────────────────────────
+  /* ═══════════════════════════════════════════
      INIT
-  ───────────────────────────────────────── */
-  onScroll();
+  ═══════════════════════════════════════════ */
+  updateNav();
 
 });
