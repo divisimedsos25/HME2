@@ -283,7 +283,7 @@ ul { list-style: none; }
   transform: translate(-50%,-48%);
   font-family: var(--ff);
   font-weight: 800;
-  font-size: clamp(120px, 32vw, 380px);
+  font-size: clamp(120px, 32vw, 250px);
   letter-spacing: -.04em;
   color: rgba(255,106,0,.03);
   pointer-events: none;
