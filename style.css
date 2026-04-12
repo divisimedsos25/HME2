@@ -587,86 +587,6 @@ ul { list-style: none; }
 }
 .reveal.in-view { opacity: 1; transform: translateY(0); }
 
-/* ═══════════════════════════════════════════
-   VISI MISI
-═══════════════════════════════════════════ */
-.vm-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 18px; margin-bottom: 36px;
-  max-width: 1200px;
-}
-@media (min-width: 768px) {
-  .vm-row { grid-template-columns: 1fr 1fr; gap: 24px; }
-}
-
-.vm-card {
-  position: relative; overflow: hidden;
-  background: var(--dark2);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: clamp(28px, 5vw, 48px) clamp(22px, 4vw, 42px);
-  transition: border-color .4s, transform .4s var(--ease);
-}
-.vm-card:hover { border-color: var(--border-h); transform: translateY(-4px); }
-
-.vm-glow {
-  position: absolute; top: -60px; right: -60px;
-  width: 180px; height: 180px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,106,0,.14), transparent 70%);
-  opacity: 0; transition: opacity .4s; pointer-events: none;
-}
-.vm-card:hover .vm-glow { opacity: 1; }
-
-.vm-num {
-  position: absolute; top: 20px; right: 24px;
-  font-size: clamp(3rem, 7vw, 5rem); font-weight: 800;
-  color: rgba(255,106,0,.07); line-height: 1;
-  pointer-events: none; user-select: none;
-}
-
-.vm-icon {
-  width: 50px; height: 50px;
-  background: var(--orange-dim);
-  border: 1px solid var(--orange-border);
-  border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem; color: var(--orange);
-  margin-bottom: 18px;
-  transition: background .3s, transform .3s;
-}
-.vm-card:hover .vm-icon { background: rgba(255,106,0,.22); transform: scale(1.08); }
-
-.vm-card h3 {
-  font-family: var(--ff);
-  font-size: clamp(1.2rem, 3vw, 1.5rem);
-  font-weight: 800; color: var(--white); margin-bottom: 14px;
-}
-.vm-card > p {
-  font-family: var(--fs);
-  font-size: clamp(.92rem, 2vw, 1.05rem);
-  color: var(--text-muted); line-height: 1.8;
-}
-
-.vm-bar {
-  position: absolute; bottom: 0; left: 0;
-  height: 3px; width: 0;
-  background: linear-gradient(to right, var(--orange), var(--orange-soft));
-  transition: width .5s var(--ease);
-}
-.vm-card:hover .vm-bar { width: 100%; }
-
-.misi-ul { display: flex; flex-direction: column; gap: 12px; }
-.misi-ul li {
-  display: flex; align-items: flex-start; gap: 12px;
-  font-family: var(--fs);
-  font-size: clamp(.88rem, 2vw, 1rem);
-  color: var(--text-muted); line-height: 1.75;
-}
-.dot {
-  flex-shrink: 0; width: 6px; height: 6px;
-  background: var(--orange); border-radius: 50%; margin-top: 9px;
-}
 
 /* Nilai */
 .nilai-row {
@@ -872,4 +792,13 @@ ul { list-style: none; }
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ... kode CSS lainnya ... */
+
+/* ══════ LOGO ══════ */
+.logo-svg {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
