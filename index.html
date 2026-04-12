@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HME</title>
+  <title>OrganisasiKu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
@@ -12,35 +12,78 @@
 </head>
 <body>
 
-  <!-- Custom Cursor -->
+  <!-- Custom Cursor (desktop only) -->
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
 
   <!-- ══════════════ NAVBAR ══════════════ -->
   <nav id="navbar">
     <div class="nav-logo">
-      <!-- SVG Logo Hexagon -->
-      <img src="logo.png" alt="HME" class="logo-svg" />
-      <div class="logo-wordmark">
-        <span class="logo-main">HME</span><span class="logo-accent">POLJAM</span>
-      </div>
+      <svg class="logo-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="32,3 60,18 60,46 32,61 4,46 4,18"
+          stroke="#FF6A00" stroke-width="2.5" fill="rgba(255,106,0,0.08)"/>
+        <polygon points="32,13 50,23 50,41 32,51 14,41 14,23"
+          stroke="#FF6A00" stroke-width="1" fill="rgba(255,106,0,0.05)" stroke-dasharray="3 2"/>
+        <text x="32" y="36" text-anchor="middle" dominant-baseline="middle"
+          fill="#FF6A00" font-size="13" font-family="Syne,sans-serif" font-weight="800">ORG</text>
+      </svg>
+      <div class="logo-wordmark">ORGANISASI<span class="logo-accent">KU</span></div>
     </div>
-    <ul class="nav-menu">
+
+    <!-- Desktop Menu -->
+    <ul class="nav-menu" id="navMenu">
       <li><a href="#hero"     class="nav-link active">Beranda</a></li>
       <li><a href="#visimisi" class="nav-link">Visi &amp; Misi</a></li>
       <li><a href="#dokumen"  class="nav-link">Dokumen</a></li>
     </ul>
+
+    <!-- Hamburger (mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <button class="drawer-close" id="drawerClose">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="drawer-logo">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="40">
+        <polygon points="32,3 60,18 60,46 32,61 4,46 4,18"
+          stroke="#FF6A00" stroke-width="2.5" fill="rgba(255,106,0,0.08)"/>
+        <text x="32" y="36" text-anchor="middle" dominant-baseline="middle"
+          fill="#FF6A00" font-size="13" font-family="Syne,sans-serif" font-weight="800">ORG</text>
+      </svg>
+      <span>ORGANISASI<em>KU</em></span>
+    </div>
+    <nav class="drawer-nav">
+      <a href="#hero"     class="drawer-link">
+        <i class="fa-solid fa-house"></i> Beranda
+      </a>
+      <a href="#visimisi" class="drawer-link">
+        <i class="fa-solid fa-eye"></i> Visi &amp; Misi
+      </a>
+      <a href="#dokumen"  class="drawer-link">
+        <i class="fa-solid fa-folder-open"></i> Dokumen
+      </a>
+    </nav>
+    <div class="drawer-footer">
+      <span>&copy; 2025 OrganisasiKu</span>
+    </div>
+  </div>
 
   <!-- ══════════════ HERO ══════════════ -->
   <section id="hero">
-    <div class="hero-bg-word"></div>
-
-    <!-- Animated orb background -->
+    <div class="hero-bg-word">ORG</div>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
     <div class="hero-inner">
+      <!-- LEFT -->
       <div class="hero-left">
         <div class="hero-badge">
           <span class="badge-pulse"></span>
@@ -56,7 +99,7 @@
         </p>
         <div class="hero-actions">
           <a href="#visimisi" class="btn-orange">
-            Jelajahi <i class="fa-solid fa-arrow-down"></i>
+            Jelajahi &nbsp;<i class="fa-solid fa-arrow-down"></i>
           </a>
           <a href="#dokumen" class="btn-outline">
             Lihat Dokumen
@@ -64,6 +107,7 @@
         </div>
       </div>
 
+      <!-- RIGHT (hidden on mobile) -->
       <div class="hero-right">
         <div class="ring r1"></div>
         <div class="ring r2"></div>
@@ -75,6 +119,17 @@
         <div class="float-pill pill-b">
           <i class="fa-solid fa-users"></i> Solid
         </div>
+      </div>
+    </div>
+
+    <!-- Mobile visual strip (replaces hero-right on small screens) -->
+    <div class="hero-mobile-strip">
+      <div class="strip-pill">
+        <i class="fa-solid fa-star"></i> Inovatif
+      </div>
+      <div class="strip-orb"></div>
+      <div class="strip-pill">
+        <i class="fa-solid fa-users"></i> Solid
       </div>
     </div>
 
@@ -94,25 +149,19 @@
     <p class="section-desc">Arah dan tujuan yang menjadi kompas perjalanan organisasi kami</p>
 
     <div class="vm-row">
-      <!-- VISI -->
       <div class="vm-card reveal">
         <div class="vm-glow"></div>
         <div class="vm-num">01</div>
-        <div class="vm-icon">
-          <i class="fa-solid fa-eye"></i>
-        </div>
+        <div class="vm-icon"><i class="fa-solid fa-eye"></i></div>
         <h3>Visi</h3>
         <p>Menjadi organisasi terdepan yang menghasilkan generasi unggul, berkarakter, dan berdaya saing global dalam mewujudkan Indonesia yang bermartabat dan sejahtera.</p>
         <div class="vm-bar"></div>
       </div>
 
-      <!-- MISI -->
-      <div class="vm-card reveal" style="transition-delay:0.15s">
+      <div class="vm-card reveal" style="transition-delay:.15s">
         <div class="vm-glow"></div>
         <div class="vm-num">02</div>
-        <div class="vm-icon">
-          <i class="fa-solid fa-rocket"></i>
-        </div>
+        <div class="vm-icon"><i class="fa-solid fa-rocket"></i></div>
         <h3>Misi</h3>
         <ul class="misi-ul">
           <li><span class="dot"></span>Menyelenggarakan program pengembangan diri dan kepemimpinan bagi seluruh anggota.</li>
@@ -124,23 +173,18 @@
       </div>
     </div>
 
-    <!-- Nilai -->
     <div class="nilai-row">
       <div class="nilai-card reveal" style="transition-delay:0s">
-        <i class="fa-solid fa-shield-heart"></i>
-        <span>Integritas</span>
+        <i class="fa-solid fa-shield-heart"></i><span>Integritas</span>
       </div>
-      <div class="nilai-card reveal" style="transition-delay:0.1s">
-        <i class="fa-solid fa-lightbulb"></i>
-        <span>Inovasi</span>
+      <div class="nilai-card reveal" style="transition-delay:.1s">
+        <i class="fa-solid fa-lightbulb"></i><span>Inovasi</span>
       </div>
-      <div class="nilai-card reveal" style="transition-delay:0.2s">
-        <i class="fa-solid fa-handshake"></i>
-        <span>Kolaborasi</span>
+      <div class="nilai-card reveal" style="transition-delay:.2s">
+        <i class="fa-solid fa-handshake"></i><span>Kolaborasi</span>
       </div>
-      <div class="nilai-card reveal" style="transition-delay:0.3s">
-        <i class="fa-solid fa-crown"></i>
-        <span>Keunggulan</span>
+      <div class="nilai-card reveal" style="transition-delay:.3s">
+        <i class="fa-solid fa-crown"></i><span>Keunggulan</span>
       </div>
     </div>
   </section>
@@ -163,53 +207,47 @@
         <div class="dc-glow"></div>
         <div class="dc-num">01</div>
         <div class="dc-accent"></div>
-        <div class="dc-icon">
-          <i class="fa-solid fa-coins"></i>
-        </div>
+        <div class="dc-icon"><i class="fa-solid fa-coins"></i></div>
         <div class="dc-tag">Divisi</div>
         <h3 class="dc-title">Bendahara</h3>
         <p class="dc-desc">Laporan keuangan, anggaran, dan bukti transaksi organisasi tersimpan rapi di sini.</p>
         <a href="https://drive.google.com/your-link-bendahara" target="_blank" class="dc-btn">
           <i class="fa-brands fa-google-drive"></i>
           <span>Buka Drive</span>
-          <i class="fa-solid fa-arrow-up-right-from-square dc-arrow"></i>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
         </a>
       </div>
 
-      <!-- SEKRETARIS (featured) -->
-      <div class="doc-card featured reveal" style="transition-delay:0.15s">
+      <!-- SEKRETARIS -->
+      <div class="doc-card featured reveal" style="transition-delay:.15s">
         <div class="dc-glow"></div>
         <div class="dc-num">02</div>
         <div class="dc-accent"></div>
         <div class="featured-badge">Utama</div>
-        <div class="dc-icon">
-          <i class="fa-solid fa-file-signature"></i>
-        </div>
+        <div class="dc-icon"><i class="fa-solid fa-file-signature"></i></div>
         <div class="dc-tag">Divisi</div>
         <h3 class="dc-title">Sekretaris</h3>
         <p class="dc-desc">Surat menyurat, notulensi rapat, dan arsip administrasi tersimpan lengkap.</p>
         <a href="https://drive.google.com/your-link-sekretaris" target="_blank" class="dc-btn">
           <i class="fa-brands fa-google-drive"></i>
           <span>Buka Drive</span>
-          <i class="fa-solid fa-arrow-up-right-from-square dc-arrow"></i>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
         </a>
       </div>
 
       <!-- PENDIDIKAN -->
-      <div class="doc-card reveal" style="transition-delay:0.3s">
+      <div class="doc-card reveal" style="transition-delay:.3s">
         <div class="dc-glow"></div>
         <div class="dc-num">03</div>
         <div class="dc-accent"></div>
-        <div class="dc-icon">
-          <i class="fa-solid fa-book-open"></i>
-        </div>
+        <div class="dc-icon"><i class="fa-solid fa-book-open"></i></div>
         <div class="dc-tag">Divisi</div>
         <h3 class="dc-title">Pendidikan</h3>
         <p class="dc-desc">Materi pelatihan, modul pembelajaran, dan program pendidikan tersedia lengkap.</p>
         <a href="https://drive.google.com/your-link-pendidikan" target="_blank" class="dc-btn">
           <i class="fa-brands fa-google-drive"></i>
           <span>Buka Drive</span>
-          <i class="fa-solid fa-arrow-up-right-from-square dc-arrow"></i>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
         </a>
       </div>
 
@@ -220,14 +258,14 @@
   <footer id="footer">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="logo.png" alt="Logo OrganisasiKu" class="logo-svg" />
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="36">
           <polygon points="32,3 60,18 60,46 32,61 4,46 4,18"
             stroke="#FF6A00" stroke-width="2.5" fill="rgba(255,106,0,0.08)"/>
           <text x="32" y="36" text-anchor="middle" dominant-baseline="middle"
-            fill="#FF6A00" font-size="13" font-family="Syne,sans-serif" font-weight="800">____</text>
+            fill="#FF6A00" font-size="13" font-family="Syne,sans-serif" font-weight="800">ORG</text>
         </svg>
         <div>
-          <div class="footer-wordmark">HME<em>KU</em></div>
+          <div class="footer-wordmark">ORGANISASI<em>KU</em></div>
           <p class="footer-tagline">Bersama Membangun Masa Depan</p>
         </div>
       </div>
@@ -238,7 +276,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2025 HME. All rights reserved.</span>
+      <span>&copy; 2025 OrganisasiKu. All rights reserved.</span>
       <span>Made with <i class="fa-solid fa-heart" style="color:#FF6A00"></i></span>
     </div>
   </footer>
