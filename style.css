@@ -356,8 +356,8 @@ ul { list-style: none; }
 }
 .hero-heading em { font-style: normal; color: var(--orange); }
 .stroke-text {
-  -webkit-text-stroke: 1.5px rgba(255,255,255,.28);
-  color: transparent;
+  -webkit-text-stroke: 0;
+  color: var(--white);
 }
 
 .hero-sub {
