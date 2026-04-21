@@ -15,7 +15,7 @@
   --dark3:         #1E1E1E;
   --white:         #FFFFFF;
   --text:          rgba(255,255,255,1.0);
-  --text-muted:    rgba(255,255,255,0.45);
+  --text-muted:    rgba(255,255,255,1.0);
   --border:        rgba(255,255,255,0.08);
   --border-h:      rgba(255,106,0,0.35);
   --ff:            'Garet', sans-serif;
